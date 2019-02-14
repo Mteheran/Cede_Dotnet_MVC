@@ -1,0 +1,23 @@
+﻿@model Cede_Dotnet_MVC.Models.User
+@{
+    ViewBag.Title = "InfoUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Información de usuario</h2>
+    <div class="form-group">
+        @Html.LabelFor(p => p.Name)
+        @Html.DisplayFor(p => p.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.LastName)
+        @Html.DisplayFor(p => p.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.Email)
+        @Html.DisplayFor(p => p.Email)
+    </div>
+    <button class="btn btn-primary" type="submit">Ingresar</button>
+</div>
+

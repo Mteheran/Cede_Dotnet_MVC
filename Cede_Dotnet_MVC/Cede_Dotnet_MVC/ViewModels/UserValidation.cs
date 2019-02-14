@@ -9,6 +9,7 @@ namespace Cede_Dotnet_MVC.ViewModels
 {
     public class UserValidation
     {
+        [Required(AllowEmptyStrings =false, ErrorMessage ="La cedula es requerida")]
         [Display(Name = "Cedula")]
         public string Nit { get; set; }
 

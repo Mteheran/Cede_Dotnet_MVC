@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cede_Dotnet_MVC", "Cede_Dot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cede_Dotnet_MVC.Tests", "Cede_Dotnet_MVC.Tests\Cede_Dotnet_MVC.Tests.csproj", "{77EF0E32-F274-4BC1-AEA6-88F3A6AB3455}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cede_Dotnet_MVC_Empty", "Cede_Dotnet_MVC_Empty\Cede_Dotnet_MVC_Empty.csproj", "{48EC04B3-79D4-4DF2-A4EA-D9C9EB454673}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{77EF0E32-F274-4BC1-AEA6-88F3A6AB3455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77EF0E32-F274-4BC1-AEA6-88F3A6AB3455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77EF0E32-F274-4BC1-AEA6-88F3A6AB3455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48EC04B3-79D4-4DF2-A4EA-D9C9EB454673}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48EC04B3-79D4-4DF2-A4EA-D9C9EB454673}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48EC04B3-79D4-4DF2-A4EA-D9C9EB454673}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48EC04B3-79D4-4DF2-A4EA-D9C9EB454673}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,43 +1,65 @@
 ﻿using Cede_Dotnet_MVC.Models;
+using Cede_Dotnet_MVC.Services.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
-using System.Web;
 
 namespace Cede_Dotnet_MVC.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
+        private string apiUrl { get; set; } = ConfigurationManager.AppSettings["apiurl"];
 
-        public List<User> GetUserByNit(string Nit)
-        {
-            HttpClient httpClient = new HttpClient();
+        private HttpClient httpClient { get; set; } = new HttpClient();
 
-            HttpResponseMessage result = httpClient.GetAsync($@"http://localhost:51708/api/User?$filter=Nit eq '{Nit}'&$format=application/json;odata.metadata=none").Result;
+        public User GetUserByUserId(string userId)
+        {          
+            HttpResponseMessage result = httpClient.GetAsync($@"{apiUrl}User/?Id={userId}").Result;
 
             if (result.IsSuccessStatusCode)
             {
                 var jsonresult = result.Content.ReadAsStringAsync().Result;
 
                 var ODataJSON =  JsonConvert.DeserializeObject<JObject>(jsonresult);
-                //ODataJSON.Property("@odata.context").Remove();
+                ODataJSON.Property("@odata.context").Remove();
                 //ODataJSON.Add("Terminal", ODataJSON["value"]); //adding Terminal attribute
                 //ODataJSON.Property("value").Remove(); // removing default value attribute.
 
-                return JsonConvert.DeserializeObject<List<User>>(ODataJSON.Property("value").Value.ToString());
+                return JsonConvert.DeserializeObject<User>(ODataJSON.ToString());
+            }
+
+            return null;
+        }
+
+        public string ValidateUserByNitAndNitDate(string nit, DateTime nitDate)
+        {
+            HttpResponseMessage result = httpClient.GetAsync($@"{apiUrl}User?$filter=Nit eq '{nit}'&$format=application/json").Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                var jsonresult = result.Content.ReadAsStringAsync().Result;
+
+                var ODataJSON = JsonConvert.DeserializeObject<JObject>(jsonresult);
+
+                var user = JsonConvert.DeserializeObject<List<User>>(ODataJSON.Property("value").Value.ToString()).FirstOrDefault();
+                if(user?.UserId.ToString() != string.Empty && user?.NitDate == nitDate)
+                {
+                    return user.UserId.ToString();
+                }
+
+                return "";
             }
 
             return null;
         }
 
         public List<User> GetUsers()
-        {
-            HttpClient httpClient = new HttpClient();
-
-            HttpResponseMessage result = httpClient.GetAsync("http://localhost:51708/api/User").Result;
+        {          
+            HttpResponseMessage result = httpClient.GetAsync($"{ apiUrl}User").Result;
 
             if (result.IsSuccessStatusCode)
             {

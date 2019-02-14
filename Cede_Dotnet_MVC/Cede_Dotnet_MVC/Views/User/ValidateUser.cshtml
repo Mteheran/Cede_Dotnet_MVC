@@ -4,18 +4,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <div class="container">
     <h2>Ingreso de usuario</h2>
 
     @using (Html.BeginForm("ValidateUser", "User", FormMethod.Post))
     {
-            @Html.ValidationSummary(true)
+        @Html.ValidationSummary(true)
+        @Html.ValidationMessage("InvalidUser", new { @class = "alert-danger" })
 
-            <div class="form-group">
-            @Html.LabelFor(p => p.Nit)
+        <div class="form-group">
+            @Html.LabelFor(p => p.Nit, new { @class = "caption" })
             @Html.TextBoxFor(p => p.Nit, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.Nit, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(p => p.NitDate)
@@ -24,3 +24,4 @@
         <button class="btn btn-primary" type="submit">Ingresar</button>
     }
 </div>
+
