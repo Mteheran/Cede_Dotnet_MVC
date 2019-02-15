@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Cede_Dotnet_MVC.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()

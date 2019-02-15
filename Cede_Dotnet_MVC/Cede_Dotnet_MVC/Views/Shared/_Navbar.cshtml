@@ -1,0 +1,27 @@
+﻿@model string
+<div class="navbar navbar-custom navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header navbar-custom">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @{ 
+                string title = Model;
+                if (string.IsNullOrEmpty(title))
+                {
+                    title = "Citas medicas";
+                }
+
+                @Html.ActionLink(title, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" });
+            }
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                <li>@Html.ActionLink("Nuestros Especialistas", "Index", "Specialist")</li>
+            </ul>
+        </div>
+    </div>
+</div>

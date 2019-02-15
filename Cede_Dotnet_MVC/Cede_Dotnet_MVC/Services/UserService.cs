@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Cede_Dotnet_MVC.Services
 {
@@ -16,13 +17,13 @@ namespace Cede_Dotnet_MVC.Services
 
         private HttpClient httpClient { get; set; } = new HttpClient();
 
-        public User GetUserByUserId(string userId)
+        public async Task<User> GetUserByUserId(string userId)
         {          
             HttpResponseMessage result = httpClient.GetAsync($@"{apiUrl}User/?Id={userId}").Result;
 
             if (result.IsSuccessStatusCode)
             {
-                var jsonresult = result.Content.ReadAsStringAsync().Result;
+                var jsonresult = await result.Content.ReadAsStringAsync();
 
                 var ODataJSON =  JsonConvert.DeserializeObject<JObject>(jsonresult);
                 ODataJSON.Property("@odata.context").Remove();

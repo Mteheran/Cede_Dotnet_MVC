@@ -8,23 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-custom navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header navbar-custom">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Citas Medicas", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_Navbar", "Citas medicas desde layout")
     <div class="container body-content">
         @RenderBody()
         <hr />

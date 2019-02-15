@@ -1,21 +1,26 @@
-﻿using Cede_Dotnet_MVC.Services;
+﻿using Cede_Dotnet_MVC.Filters;
+using Cede_Dotnet_MVC.Services;
 using Cede_Dotnet_MVC.Services.Contract;
 using Cede_Dotnet_MVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Cede_Dotnet_MVC.Controllers
 {
+    [UserErrorHandler]
     public class UserController : Controller
     {
-        public IUserService userService {get;set;}
+        private IUserService userService {get;set;}
 
         public UserController(IUserService userService)
         {
             this.userService = userService;
+
+            ViewBag.Title = "Usuarios";
         }
 
         public ActionResult Index()
@@ -25,12 +30,12 @@ namespace Cede_Dotnet_MVC.Controllers
 
         public ActionResult ValidateUser()
         {
-            return View(new UserValidation());
+            return View(new UserValidation() { NitDate = DateTime.Now } );
         }
 
-        public ActionResult InfoUser(string id)
+        public async Task<ActionResult> InfoUser(string id)
         {
-            var user = userService.GetUserByUserId(id);
+            var user = await userService.GetUserByUserId(id);
 
             if (user?.UserId.ToString() != string.Empty)
             {
@@ -46,10 +51,10 @@ namespace Cede_Dotnet_MVC.Controllers
         public ActionResult ValidateUser(UserValidation userValidation)
         {
             if (!ModelState.IsValid) return View(new UserValidation());
-
+            
             string UserId = userService.ValidateUserByNitAndNitDate(userValidation.Nit, userValidation.NitDate);
 
-            if (UserId!=string.Empty)
+            if (!string.IsNullOrEmpty(UserId))
             {
                 return RedirectToAction("InfoUser", "User", new { id = UserId });
             }

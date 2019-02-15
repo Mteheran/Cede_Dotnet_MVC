@@ -7,10 +7,8 @@ using System.Web;
 
 namespace Cede_Dotnet_MVC.Services.Contract
 {
-    public interface IUserService
+    public interface ISpecialistService
     {
-        Task<User> GetUserByUserId(string userId);
-        string ValidateUserByNitAndNitDate(string nit, DateTime nitDate);
-        List<User> GetUsers();
+        Task<List<Specialist>> GetSpecialist();
     }
 }

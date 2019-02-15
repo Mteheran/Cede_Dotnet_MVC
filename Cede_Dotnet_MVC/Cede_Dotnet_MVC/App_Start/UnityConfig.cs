@@ -46,6 +46,7 @@ namespace Cede_Dotnet_MVC
             // container.RegisterType<IProductRepository, ProductRepository>();
 
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<ISpecialistService, SpecialistService>();
         }
     }
 }
