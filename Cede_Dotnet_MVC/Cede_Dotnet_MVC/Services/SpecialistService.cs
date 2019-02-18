@@ -2,13 +2,10 @@
 using Cede_Dotnet_MVC.Services.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace Cede_Dotnet_MVC.Services
 {

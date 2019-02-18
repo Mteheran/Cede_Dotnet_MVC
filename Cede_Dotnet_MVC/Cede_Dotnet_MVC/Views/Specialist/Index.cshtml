@@ -5,54 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View</h2>
+<h2>Nuestros especialistas</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SpecialistId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SpecialistId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SpecialistId })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="container row">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/Images/speacialistEmpty.jpg" alt="Especialista">
+                <div class="card-body">
+                    <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.LastName)</h5>                   
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Specialty)</p>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="col w-100"></div>      
+</div>

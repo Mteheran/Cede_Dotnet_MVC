@@ -47,6 +47,8 @@ namespace Cede_Dotnet_MVC
 
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<ISpecialistService, SpecialistService>();
+            container.RegisterType<IDisponibilityService, DisponibilityService>();
+            container.RegisterType<IAppointmentService, AppointmentService>();
         }
     }
 }

@@ -1,27 +1,21 @@
 ﻿@model string
-<div class="navbar navbar-custom navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header navbar-custom">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @{ 
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">    
+    <div class="navbar-collapse collapse">       
+        <ul class="nav mr-auto">
+            @{
                 string title = Model;
                 if (string.IsNullOrEmpty(title))
                 {
                     title = "Citas medicas";
                 }
 
-                @Html.ActionLink(title, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" });
+                <li class="nav-item">
+                    @Html.ActionLink(title, "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
             }
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                <li>@Html.ActionLink("Nuestros Especialistas", "Index", "Specialist")</li>
-            </ul>
-        </div>
-    </div>
-</div>
+            <li class="nav-item active">@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })</li>
+            <li class="nav-item active">@Html.ActionLink("Solicitar Cita", "VlidateUser", "User", null, new { @class = "nav-link" })</li>
+            <li class="nav-item">@Html.ActionLink("Nuestros Especialistas", "Index", "Specialist", null, new { @class = "nav-link" })</li>
+        </ul>
+    </div>   
+    </nav>

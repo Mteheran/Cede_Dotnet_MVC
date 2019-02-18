@@ -1,9 +1,6 @@
 ﻿using Cede_Dotnet_MVC.Models.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Cede_Dotnet_MVC.Models
 {
@@ -13,16 +10,20 @@ namespace Cede_Dotnet_MVC.Models
 
         [Required]
         [MaxLength(100)]
+        [Display(Name = "Nombre")]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(100)]
+        [Display(Name = "Apellido")]
         public string LastName { get; set; }
 
         [Required]
         [MaxLength(30)]
+        [Display(Name = "Identificación")]
         public string Nit { get; set; }
 
+        [Display(Name = "Tipo Identificación")]
         public NitType NitType { get; set; }
 
         public DateTime NitDate { get; set; }

@@ -1,0 +1,112 @@
+﻿@model Cede_Dotnet_MVC.Models.Appointment
+@{
+    ViewBag.Title = "Solicitar Cita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="panel">
+    <header class="panel-heading">
+        <h2>Solicitar Cita</h2>
+    </header>
+    <div class="panel-body">
+
+        @if (Model != null)
+        {
+            using (Html.BeginForm("SaveAppointment", "Appointment", FormMethod.Post))
+            {
+                @Html.HiddenFor(p => p.Code)
+                @Html.HiddenFor(p => p.UserId)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Specialist.Specialty, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(x => x.Specialist.Specialty, "Seleccione..", htmlAttributes: new { @id = "listSpeciality", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Specialist.Specialty, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SpecialistId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("SpecialistId", new List<SelectListItem>(), "Seleccione..", htmlAttributes: new { @id = "listSpecialist", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SpecialistId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AppointmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(p => p.AppointmentDate, new { @class = "form-control", @type = "date" })
+                        @Html.ValidationMessageFor(p => p.AppointmentDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.DisplayText("Hora")
+                    <div class="col-md-10">
+                        @Html.DropDownList("Hour", new List<SelectListItem>(), "Seleccione..", htmlAttributes: new { @id = "listHour", @class = "form-control", @required = true })
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Guardar Cita</button>
+            }
+        }
+        else
+        {          
+                <span class="alert-success">@ViewData["ConfirmMessage"]</span>
+        }
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    $("#listSpeciality").change(changeSpeciality);
+
+    $("#listSpecialist").change(changeHour);
+
+    changeSpeciality();
+
+    function changeSpeciality() {
+        $("select[id$=listSpecialist] > option").remove();
+        var optionSelected = $("#listSpeciality").find("option:selected");
+        var valueSelected = optionSelected.val();
+        var TextSelected = optionSelected.text();
+        @if (ViewData["Specialist"] != null)
+        {
+                foreach (var item in ((IEnumerable<Cede_Dotnet_MVC.Models.Specialist>)ViewData["Specialist"]))
+                {
+                     @:if (valueSelected == @((int)item.Specialty) && TextSelected != "Seleccione..")
+                     {
+                         @:$('#listSpecialist').append($('<option>', { value: "@item.SpecialistId", text: "@Html.Raw(item.Name + " " + item.LastName)" }));
+                      }
+                }
+        }
+       
+        $("#listSpecialist").change();
+        changeHour();
+    }
+
+
+    function changeHour() {
+        $("select[id$=listHour] > option").remove();
+        var optionSelected = $("#listSpecialist").find("option:selected");
+        var valueSelected = optionSelected.val();
+        @if (ViewData["Disponibility"] != null) {
+                foreach (var item in ((IEnumerable < Cede_Dotnet_MVC.Models.Disponibility>)ViewData["Disponibility"]))
+                 {
+                     @:if (valueSelected == "@(item.SpecialistId.ToString())")
+                     {
+                         @:$('#listHour').append($('<option>', { value: "@item.Hour", text: "@Html.Raw(item.Hour) : 00" }));
+                      }
+                  }
+          
+        }
+
+        $("#listHour").change();
+    }       
+
+</script>
+
+}

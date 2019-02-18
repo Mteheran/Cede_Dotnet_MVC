@@ -9,13 +9,13 @@
 
     @using (Html.BeginForm("ValidateUser", "User", FormMethod.Post))
     {
-        //@Html.ValidationSummary(false,"", new { @class = "text-danger" })
+        @Html.ValidationSummary(false,"", new { @class = "text-danger" })
         @Html.ValidationMessage("InvalidUser", new { @class = "alert-danger" })
 
         <div class="form-group">
             @Html.LabelFor(p => p.Nit, new { @class = "caption" })
             @Html.TextBoxFor(p => p.Nit, new { @class = "form-control" })
-            @*@Html.ValidationMessageFor(p => p.Nit, "", new { @class = "text-danger" })*@
+            @Html.ValidationMessageFor(p => p.Nit, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(p => p.NitDate)

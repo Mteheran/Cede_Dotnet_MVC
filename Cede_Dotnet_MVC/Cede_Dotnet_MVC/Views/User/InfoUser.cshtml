@@ -1,23 +1,28 @@
 ﻿@model Cede_Dotnet_MVC.Models.User
 @{
-    ViewBag.Title = "InfoUser";
+    ViewBag.Title = "Información de usuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <h2>Información de usuario</h2>
-    <div class="form-group">
-        @Html.LabelFor(p => p.Name)
-        @Html.DisplayFor(p => p.Name)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.LastName)
-        @Html.DisplayFor(p => p.LastName)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.Email)
-        @Html.DisplayFor(p => p.Email)
-    </div>
-    <button class="btn btn-primary" type="submit">Ingresar</button>
+
+    @using (Html.BeginForm("RequestAppointment", "Appointment", FormMethod.Post))
+    {
+        @Html.HiddenFor(p => p.UserId)
+        <div class="form-group">
+            @Html.LabelFor(p => p.Name, new { @class = "caption font-weight-bold" })
+            @Html.DisplayFor(p => p.Name, new { @class = "text-right" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.LastName, new { @class = "caption font-weight-bold" })
+            @Html.DisplayFor(p => p.LastName, new { @class = "text-right" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.Email, new { @class = "caption font-weight-bold" })
+            @Html.DisplayFor(p => p.Email, new { @class = "text-right" })
+        </div>
+        <button class="btn btn-primary" type="submit">Solicitar cita</button>
+    }
 </div>
 
