@@ -5,20 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nuestros especialistas</h2>
+<h2 class="thead-dark">Nuestros especialistas</h2>
 
 <div class="container row">
     @foreach (var item in Model)
     {
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="~/Images/speacialistEmpty.jpg" alt="Especialista">
-                <div class="card-body">
-                    <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.LastName)</h5>                   
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.Specialty)</p>
+        <div class="form-group">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.LastName)</h5>
+                        <p class="card-text">@Cede_Dotnet_MVC.Helpers.SpecialityHelperString.GetSpecialityLabel(item.Specialty)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Email)</p>
+                    </div>
+                    <img class="card-img-bottom" src="~/Images/speacialistEmpty.jpg" alt="Especialista">
                 </div>
             </div>
         </div>
     }
-    <div class="col w-100"></div>      
+    <div class="col w-100"></div>
 </div>

@@ -23,11 +23,12 @@ namespace Cede_Dotnet_MVC.Controllers
             ViewBag.Title = "Usuarios";
         }
 
+        [NonAction] // no effect action
         public ActionResult Index()
         {
             return View();
         }
-
+                
         public ActionResult ValidateUser()
         {
             return View(new UserValidation() { NitDate = DateTime.Now } );
@@ -48,6 +49,7 @@ namespace Cede_Dotnet_MVC.Controllers
         }
 
         [HttpPost]
+        [ActionName("UserValidation")]
         public ActionResult ValidateUser(UserValidation userValidation)
         {
             if (!ModelState.IsValid) return View(new UserValidation());
@@ -61,7 +63,7 @@ namespace Cede_Dotnet_MVC.Controllers
                         
             ModelState.AddModelError("InvalidUser", "Usuario no encontrado en el sistema");
 
-            return View(new UserValidation());
+            return View("ValidateUser", new UserValidation());
         }
     }
 }

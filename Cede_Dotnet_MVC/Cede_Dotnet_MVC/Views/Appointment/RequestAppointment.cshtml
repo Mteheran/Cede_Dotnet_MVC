@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.DisplayText("Hora")
+                    <label class="control-label col-md-2">Hora</label>
                     <div class="col-md-10">
                         @Html.DropDownList("Hour", new List<SelectListItem>(), "Seleccione..", htmlAttributes: new { @id = "listHour", @class = "form-control", @required = true })
                     </div>
@@ -55,7 +55,7 @@
         }
         else
         {          
-                <span class="alert-success">@ViewData["ConfirmMessage"]</span>
+                <span class="alert-success">Su cita ha sido almacenada. Código: " @TempData["AppointmentCode"]</span>
         }
     </div>
 </section>

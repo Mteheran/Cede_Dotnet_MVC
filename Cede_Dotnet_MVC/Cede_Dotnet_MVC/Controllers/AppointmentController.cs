@@ -24,10 +24,28 @@ namespace Cede_Dotnet_MVC.Controllers
         {
             Appointment appointment = new Appointment();
             appointment.UserId = user.UserId;
+            
+            if (HttpContext.Cache["Specialist"]==null)
+            {
+                ViewBag.Specialist = await specialistService.GetSpecialist();
+                HttpContext.Cache["Specialist"] = ViewBag.Specialist;
+            }
+            else
+            {
+                ViewBag.Specialist = HttpContext.Cache["Specialist"];
+            }
 
-            ViewBag.Specialist = await specialistService.GetSpecialist();
-            ViewBag.SpecialistList = new SelectList(await specialistService.GetSpecialist(), "SpecialistId", "Name ");
-            ViewBag.Disponibility = await disponibilityService.GetDisponibility();
+            //ViewBag.SpecialistList = new SelectList(await specialistService.GetSpecialist(), "SpecialistId", "Name ");
+
+            if (HttpContext.Cache["Disponibility"] == null)
+            {
+                ViewBag.Disponibility = await disponibilityService.GetDisponibility();
+                HttpContext.Cache["Disponibility"] = ViewBag.Disponibility;
+            }
+            else
+            {
+                ViewBag.Disponibility = HttpContext.Cache["Disponibility"];
+            }
 
             return View(appointment);
         }
@@ -35,7 +53,11 @@ namespace Cede_Dotnet_MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> RequestAppointmentOk(string Id)
         {
-            ViewData["ConfirmMessage"] = "Su cita ha sido almacenada. Código: " + Id;
+            //Session["AppointmentCode"] = Id;
+            TempData["AppointmentCode"] = Id;
+            //ViewData["AppointmentCode"] = Id;
+
+            TempData.Keep();
 
             return View("RequestAppointment", null);
         }

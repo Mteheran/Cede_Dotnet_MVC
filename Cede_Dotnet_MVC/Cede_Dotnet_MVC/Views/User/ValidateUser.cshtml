@@ -7,7 +7,7 @@
 <div class="container">
     <h2>Ingreso de usuario</h2>
 
-    @using (Html.BeginForm("ValidateUser", "User", FormMethod.Post))
+    @using (Html.BeginForm("UserValidation", "User", FormMethod.Post))
     {
         @Html.ValidationSummary(false,"", new { @class = "text-danger" })
         @Html.ValidationMessage("InvalidUser", new { @class = "alert-danger" })
